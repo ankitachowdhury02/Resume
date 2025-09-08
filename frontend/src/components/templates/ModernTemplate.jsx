@@ -135,20 +135,15 @@ const ModernTemplate = ({ resumeData }) => {
                 Skills
               </h2>
               <div className="space-y-4">
-                {skills.reduce((acc, skill, index) => {
+                {Object.entries(skills.reduce((acc, skill) => {
                   const category = skill.category || 'Other';
                   if (!acc[category]) acc[category] = [];
                   acc[category].push(skill);
                   return acc;
-                }, {}).map((categorySkills, categoryIndex) => (
+                }, {})).map(([category, categorySkills], categoryIndex) => (
                   <div key={categoryIndex} className="space-y-2">
                     <h3 className="font-semibold text-gray-900 text-sm">
-                      {Object.keys(skills.reduce((acc, skill) => {
-                        const category = skill.category || 'Other';
-                        if (!acc[category]) acc[category] = [];
-                        acc[category].push(skill);
-                        return acc;
-                      }, {}))[categoryIndex]}
+                      {category}
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {categorySkills.map((skill, skillIndex) => (
